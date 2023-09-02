@@ -1,4 +1,4 @@
-import { WAMessageStubType } from '@adiwajshing/baileys'
+let WAMessageStubType = (await import(global.baileys)).default
 
 export async function before(m, { conn, participants, groupMetadata }) {
 if (!m.messageStubType || !m.isGroup) return
@@ -37,6 +37,9 @@ await conn.sendMessage(m.chat, { text: admingp, mentions: [`${m.sender}`,`${m.me
 
 } else if (chat.detect && m.messageStubType == 30) {
 await conn.sendMessage(m.chat, { text: noadmingp, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`] }, { quoted: fkontak })  
+
+} else if (chat.detect && m.messageStubType == 145) {
+await conn.sendMessage(m.chat, { text: 'Se ha activado el modo de aprobación para unirse al grupo.', mentions: [m.sender] })
 
 } else {
 console.log({ messageStubType: m.messageStubType,
